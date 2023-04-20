@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  html {
+    font-family: "Nunito Sans", sans-serif;
+  }
+  body {
+    @apply bg-[#031404];
+  }
+  .profile-img-div {
+    background: linear-gradient(270deg, #43e32f, #1fe1ba);
+  }
+  .profile-img-div:hover {
+    background: linear-gradient(90deg, #43e32f, #1fe1ba);
+    transition: all .3s ease-in-out;
+
+  }
+  .gradient-text {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
