@@ -28,6 +28,7 @@ Provides options for setting a room as public or private.
 
 Profile:
 Allows users to update their profile information.
+
 Features and Benefits:
 The welcoming introduction on the Welcome Page engages users from the start.
 The Login module ensures a secure and hassle-free login or registration process.
