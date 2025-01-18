@@ -34,7 +34,7 @@ const Navigation = () => {
               <Link to="/profile">
                 <img
                 
-                  src={user.avatar ? user.avatar : 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png'}
+                  src={user?.avatar ? user?.avatar : 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png'}
                   alt="profile image"
                   className="w-16 h-16 rounded-full p-1 profile-img"
                 />
