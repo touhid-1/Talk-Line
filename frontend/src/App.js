@@ -17,6 +17,8 @@ const App = () => {
 
   const { loading } = useLoadingWithRefresh();
 
+  console.log({loading})
+
   return loading ? (
     <Loader message="Loading please wait..." />
   ) : (
