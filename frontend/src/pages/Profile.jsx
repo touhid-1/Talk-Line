@@ -17,8 +17,8 @@ const Profile = () => {
 
     <div className="rounded-t-xl p-5 mt-10 bg-[#112a02] h-[calc(100vh-188px)]">
         <div className="flex text-white justify-between items-center">
-          <img src={user.avatar} alt="profile-img" />
-          {user.name}
+          <img src={user?.avatar} alt="profile-img" />
+          {user?.name}
         </div>
 
         <div className="flex flex-row">

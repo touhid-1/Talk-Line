@@ -55,7 +55,7 @@ export const useWebRTC = (roomId, user) => {
 
         startCapture().then(() => {
             addNewClient({ ...user, muted: true }, () => {
-                const localElement = audioElements.current[user.id];
+                const localElement = audioElements.current[user?.id];
                 if (localElement) {
                     localElement.volume = 0;
                     localElement.srcObject = localMediaStream.current;
@@ -82,7 +82,7 @@ export const useWebRTC = (roomId, user) => {
         }) => {
             // if already connected then give warning
             if (peerId in connections.current) {
-                return console.warn(`You are already connected with ${peerId} (${user.name})`);
+                return console.warn(`You are already connected with ${peerId} (${user?.name})`);
             }
 
             connections.current[peerId] = new RTCPeerConnection({
@@ -103,14 +103,14 @@ export const useWebRTC = (roomId, user) => {
                 streams: [remoteStream],
             }) => {
                 addNewClient({ ...remoteUser, muted: true }, () => {
-                    if (audioElements.current[remoteUser.id]) {
-                        audioElements.current[remoteUser.id].srcObject =
+                    if (audioElements.current[remoteuser?.id]) {
+                        audioElements.current[remoteuser?.id].srcObject =
                             remoteStream;
                     } else {
                         let settled = false;
                         const interval = setInterval(() => {
-                            if (audioElements.current[remoteUser.id]) {
-                                audioElements.current[remoteUser.id].srcObject =
+                            if (audioElements.current[remoteuser?.id]) {
+                                audioElements.current[remoteuser?.id].srcObject =
                                     remoteStream;
                                 settled = true;
                             }

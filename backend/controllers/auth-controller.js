@@ -72,11 +72,11 @@ class AuthController {
 
         // JWT
         const { accessToken, refreshToken } = TokenService.generateTokens({
-            _id: user._id,
+            _id: user?._id,
             activated: false,
         });
 
-        await TokenService.storeRefreshToken(refreshToken, user._id);
+        await TokenService.storeRefreshToken(refreshToken, user?._id);
 
         // cookie 
         res.cookie('refreshToken', refreshToken, {

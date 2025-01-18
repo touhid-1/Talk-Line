@@ -15,7 +15,7 @@ const Room = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        handleMute(isMute, user.id)
+        handleMute(isMute, user?.id)
     }, [isMute])
 
     const handleManualLeave = () => {
@@ -35,7 +35,7 @@ const Room = () => {
 
 
     const handleMuteClick = (clientId) => {
-        if (clientId !== user.id) return;
+        if (clientId !== user?.id) return;
         setMute((isMute) => !isMute);
     }
 
