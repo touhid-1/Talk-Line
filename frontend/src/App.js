@@ -17,6 +17,8 @@ const App = () => {
 
   const { loading } = useLoadingWithRefresh();
 
+  console.log({ loading })
+
   return loading ? (
     <Loader message="Loading please wait..." />
   ) : (
@@ -67,7 +69,7 @@ const SemiProtectedRoute = () => {
       <Navigate
         to='/'
       />
-    ) : isAuth && !user.activated ? (
+    ) : isAuth && !user?.activated ? (
       <Outlet />
     ) : (
       <Navigate
@@ -84,7 +86,7 @@ const ProtectedRoute = () => {
       <Navigate
         to='/'
       />
-    ) : isAuth && !user.activated ? (
+    ) : isAuth && !user?.activated ? (
       <Navigate
         to='/activate'
       />

@@ -4,11 +4,13 @@ module.exports = async function (req, res, next) {
     try {
         const { accessToken } = req.cookies;
         if (!accessToken) {
+            console.log('No access Token in Cookies')
             throw new Error();
         }
         const userData = await TokenService.verifyAccessToken(accessToken);
 
         if (!userData) {
+            console.log('No user Data')
             throw new Error();
         }
         req.user = userData;

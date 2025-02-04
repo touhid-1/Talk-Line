@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { ACTIONS } from '../actions';
-import {socketInit} from '../socket';
+import { socketInit } from '../socket';
 import freeice from 'freeice';
 import { useStateWithCallback } from './useStateWithCallback';
 
@@ -60,7 +60,7 @@ export const useWebRTC = (roomId, user) => {
                 console.log('render inside handle new peer', 8);
                 if (peerId in connections.current) {
                     return console.warn(
-                        `You are already connected with ${peerId} (${user.name})`
+                        `You are already connected with ${peerId} (${user?.name})`
                     );
                 }
 
@@ -83,15 +83,15 @@ export const useWebRTC = (roomId, user) => {
                 }) => {
                     addNewClient({ ...remoteUser, muted: true }, () => {
                         console.log('render add new client remote', 9);
-                        if (audioElements.current[remoteUser.id]) {
-                            audioElements.current[remoteUser.id].srcObject =
+                        if (audioElements.current[remoteuser?.id]) {
+                            audioElements.current[remoteuser?.id].srcObject =
                                 remoteStream;
                         } else {
                             let settled = false;
                             const interval = setInterval(() => {
-                                if (audioElements.current[remoteUser.id]) {
+                                if (audioElements.current[remoteuser?.id]) {
                                     audioElements.current[
-                                        remoteUser.id
+                                        remoteuser?.id
                                     ].srcObject = remoteStream;
                                     settled = true;
                                 }
@@ -137,7 +137,7 @@ export const useWebRTC = (roomId, user) => {
             // =============================== Handle add new client me ================================
             addNewClient({ ...user, muted: true }, () => {
                 console.log('render add new client me', 6);
-                const localElement = audioElements.current[user.id];
+                const localElement = audioElements.current[user?.id];
                 if (localElement) {
                     localElement.volume = 0;
                     localElement.srcObject = localMediaStream.current;
@@ -262,7 +262,7 @@ export const useWebRTC = (roomId, user) => {
     //         console.log('render inside handle new peer', 8);
     //         if (peerId in connections.current) {
     //             return console.warn(
-    //                 `You are already connected with ${peerId} (${user.name})`
+    //                 `You are already connected with ${peerId} (${user?.name})`
     //             );
     //         }
 
@@ -285,14 +285,14 @@ export const useWebRTC = (roomId, user) => {
     //         }) => {
     //             addNewClient({ ...remoteUser, muted: true }, () => {
     //                 console.log('render add new client remote', 9);
-    //                 if (audioElements.current[remoteUser.id]) {
-    //                     audioElements.current[remoteUser.id].srcObject =
+    //                 if (audioElements.current[remoteuser?.id]) {
+    //                     audioElements.current[remoteuser?.id].srcObject =
     //                         remoteStream;
     //                 } else {
     //                     let settled = false;
     //                     const interval = setInterval(() => {
-    //                         if (audioElements.current[remoteUser.id]) {
-    //                             audioElements.current[remoteUser.id].srcObject =
+    //                         if (audioElements.current[remoteuser?.id]) {
+    //                             audioElements.current[remoteuser?.id].srcObject =
     //                                 remoteStream;
     //                             settled = true;
     //                         }
@@ -440,19 +440,19 @@ export const useWebRTC = (roomId, user) => {
     const handleMute = (isMute, userId) => {
         let settled = false;
 
-        if (userId === user.id) {
+        if (userId === user?.id) {
             let interval = setInterval(() => {
                 if (localMediaStream.current) {
                     localMediaStream.current.getTracks()[0].enabled = !isMute;
                     if (isMute) {
                         socket.current.emit(ACTIONS.MUTE, {
                             roomId,
-                            userId: user.id,
+                            userId: user?.id,
                         });
                     } else {
                         socket.current.emit(ACTIONS.UN_MUTE, {
                             roomId,
-                            userId: user.id,
+                            userId: user?.id,
                         });
                     }
                     settled = true;
