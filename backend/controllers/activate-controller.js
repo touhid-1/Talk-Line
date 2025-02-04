@@ -33,14 +33,14 @@ class ActivateController {
 
         // update User
         try {
-           const user = await userService.findUser({ _id: userId });
+            const user = await userService.findUser({ _id: userId });
             if (!user) {
                 res.status(404).json({ message: 'User not found' });
             }
-            user?.activated = true;
-            user?.name = name;
-            user?.avatar = `/storage/${imagePath}`;
-            user?.save();
+            user.activated = true;
+            user.name = name;
+            user.avatar = `/storage/${imagePath}`;
+            user.save();
             res.json({ user: new UserDto(user), auth: true })
         } catch (error) {
             res.status(500).json({ message: 'DB Error' })

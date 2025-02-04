@@ -16,7 +16,7 @@ const StepPhone = ({ onNext }) => {
 
 
   async function submit() {
-    if(!value) return console.log('first');
+    if (!value) return console.log('first');
     // server request
     try {
       const { data } = await sendOtp({ phone: value });
