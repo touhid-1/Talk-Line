@@ -10,7 +10,7 @@ import Loader from '../../components/shared/Loader';
 const StepAvatar = ({ onNext }) => {
   const dispatch = useDispatch();
   const { name, avatar } = useSelector((state) => state.activate);
-  const [image, setImage] = useState('https://firebasestorage.googleapis.com/v0/b/react-gallery-33fe6.appspot.com/o/IMG_20221128_015108.jpg?alt=media&token=c32e94e4-8fae-4b22-af10-95a1503f05cd');
+  const [image, setImage] = useState('');
   const [loading, setLoading] = useState(false);
 
   function captureImage(e) {
@@ -22,7 +22,7 @@ const StepAvatar = ({ onNext }) => {
       dispatch(setAvatar(reader.result))
     }
   }
-  
+
   async function submit() {
     if (!name || !avatar) return;
 
@@ -45,11 +45,13 @@ const StepAvatar = ({ onNext }) => {
     <Card title={`Okay, ${name}!`} icon="logo192.png" >
       <p className="text-[#808B82] mb-5 w-[70%] mx-auto text-center text-md">How’s this photo?</p>
       <div className="profile-img-div rounded-full flex justify-center items-center w-16 h-16 sm:w-20 sm:h-20">
-        <img
-          src={image}
-          alt="profile image"
-          className=" w-16 h-16 sm:w-20 sm:h-20 p-1 rounded-full profile-img"
-        />
+        {image &&
+          <img
+            src={image}
+            alt="profile image"
+            className=" w-16 h-16 sm:w-20 sm:h-20 p-1 rounded-full profile-img"
+          />
+        }
       </div>
       <div className="cursor-pointer">
         <input
