@@ -83,15 +83,15 @@ export const useWebRTC = (roomId, user) => {
                 }) => {
                     addNewClient({ ...remoteUser, muted: true }, () => {
                         console.log('render add new client remote', 9);
-                        if (audioElements.current[remoteuser?.id]) {
-                            audioElements.current[remoteuser?.id].srcObject =
+                        if (audioElements.current[remoteUser?.id]) {
+                            audioElements.current[remoteUser?.id].srcObject =
                                 remoteStream;
                         } else {
                             let settled = false;
                             const interval = setInterval(() => {
-                                if (audioElements.current[remoteuser?.id]) {
+                                if (audioElements.current[remoteUser?.id]) {
                                     audioElements.current[
-                                        remoteuser?.id
+                                        remoteUser?.id
                                     ].srcObject = remoteStream;
                                     settled = true;
                                 }

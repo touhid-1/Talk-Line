@@ -29,7 +29,7 @@ class ActivateController {
             res.status(500).json({ message: 'Internal Error' })
         }
 
-        const userId = req.user._id;
+        const userId = req.user?._id;
 
         // update User
         try {
@@ -37,10 +37,10 @@ class ActivateController {
             if (!user) {
                 res.status(404).json({ message: 'User not found' });
             }
-            user.activated = true;
-            user.name = name;
-            user.avatar = `/storage/${imagePath}`;
-            user.save();
+            user?.activated = true;
+            user?.name = name;
+            user?.avatar = `/storage/${imagePath}`;
+            user?.save();
             res.json({ user: new UserDto(user), auth: true })
         } catch (error) {
             res.status(500).json({ message: 'DB Error' })
