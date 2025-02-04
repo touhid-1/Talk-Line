@@ -8,7 +8,8 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
 const ACTIONS = require('./actions');
- 
+const path = require('path');
+
 const io = require('socket.io')(server, {
     cors: {
         origin: process.env.FRONT_URL,
@@ -29,9 +30,44 @@ DbConnect();
 app.use(express.json({ limit: '8mb' }));
 app.use(router);
 
-app.get('/', (req, res) => {
-    res.send(`This is TalkLine's Backend`);
-});
+
+// ---------------------- DEPLOYMENT -------------------------
+
+const __dirname1 = path.dirname(require.main.filename); // Correct base directory
+
+if (process.env.NODE_ENV === "production") {
+    const frontendPath = path.join(__dirname1, "../frontend/build"); // Adjusted path
+
+    app.use(express.static(frontendPath));
+
+    app.get("*", (req, res) => {
+        res.sendFile(path.join(frontendPath, "index.html"));
+    });
+} else {
+    app.get("/", (req, res) => {
+        res.send(`This is TalkLine's Backend`);
+    });
+}
+
+
+// const __dirname1 = path.resolve();
+
+// if (process.env.NODE_ENV === "production") {
+//     app.use(express.static(path.join(__dirname1, "/frontend/build")))
+
+//     app.get("*", (req, res) => {
+//         res.sendFile(path.resolve(__dirname1, "frontend", "build", "index.html"))
+//     })
+// } else {
+
+//     app.get('/', (req, res) => {
+//         res.send(`This is TalkLine's Backend`);
+//     });
+// }
+
+
+
+// ---------------------- DEPLOYMENT -------------------------
 
 // Sockets
 const socketUserMap = {};
