@@ -7,16 +7,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setAuth } from '../../store/authSlice';
 
 const StepOtp = ({ onNext }) => {
-  const [otp, setOtp] = useState();
+  const [inputOtp, setInputOtp] = useState();
   const dispatch = useDispatch();
-  const { phone, hash, otp: storeOtp } = useSelector((state) => state.auth.otp)
+  const { phone, hash, otp } = useSelector((state) => state.auth.otp || {});
+  console.log({ otp });
+
 
   async function submit() {
-    console.log(otp, phone, hash)
-    if (!otp || !phone || !hash) return;
+    // console.log(inputOtp, phone, hash)
+    if (!inputOtp || !phone || !hash) return;
 
     try {
-      const { data } = await verifyOtp({ otp, phone, hash });
+      const { data } = await verifyOtp({ otp: inputOtp, phone, hash });
       dispatch(setAuth(data?.data));
       // onNext();
     } catch (error) {
@@ -27,12 +29,12 @@ const StepOtp = ({ onNext }) => {
 
   return (
     <Card title="Enter Your OTP" icon="logo192.png" >
-      <p className="text-[#808B82] my-5 w-[70%] mx-auto">
-        {storeOtp}
+      <p className="text-[#808B82] my-5 ">
+        {otp ?? 'no otp'}
       </p>
       <TextInput
-        value={otp}
-        onChange={(e) => setOtp(e.target.value)}
+        value={inputOtp}
+        onChange={(e) => setInputOtp(e.target.value)}
       />
       <div className="my-5">
         <Button btnText="Verify" onClick={submit} />
