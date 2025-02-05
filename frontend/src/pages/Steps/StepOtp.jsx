@@ -9,7 +9,7 @@ import { setAuth } from '../../store/authSlice';
 const StepOtp = ({ onNext }) => {
   const [otp, setOtp] = useState();
   const dispatch = useDispatch();
-  const { phone, hash } = useSelector((state) => state.auth.otp)
+  const { phone, hash, otp: storeOtp } = useSelector((state) => state.auth.otp)
 
   async function submit() {
     console.log(otp, phone, hash)
@@ -27,6 +27,9 @@ const StepOtp = ({ onNext }) => {
 
   return (
     <Card title="Enter Your OTP" icon="logo192.png" >
+      <p className="text-[#808B82] my-5 w-[70%] mx-auto">
+        {storeOtp}
+      </p>
       <TextInput
         value={otp}
         onChange={(e) => setOtp(e.target.value)}

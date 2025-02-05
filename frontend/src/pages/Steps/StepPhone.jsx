@@ -21,7 +21,7 @@ const StepPhone = ({ onNext }) => {
     try {
       const { data } = await sendOtp({ phone: value });
       console.log(data);
-      dispatch(setOtp({ phone: data?.data?.phone, hash: data?.data?.hash }));
+      dispatch(setOtp({ phone: data?.data?.phone, hash: data?.data?.hash, otp: data?.data?.otp }));
       onNext();
     } catch (e) {
       console.log(e);
